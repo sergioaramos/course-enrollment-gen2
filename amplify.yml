@@ -1,0 +1,21 @@
+version: 1
+backend:
+  phases:
+    build:
+      commands:
+        # npm ci falla: un paquete de Amplify se publica con el lock desalineado (R-9 del Lab 1).
+        # npm install respeta el lock y tolera la diferencia.
+        - npm install --no-audit --no-fund --cache .npm --prefer-offline
+        - npx ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID
+frontend:
+  phases:
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - .npm/**/*
