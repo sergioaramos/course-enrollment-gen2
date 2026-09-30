@@ -1,7 +1,8 @@
 import './App.css'
 import { Authenticator } from '@aws-amplify/ui-react'
 
-function App() {
+//coment: This is the main App component that uses AWS Amplify's Authenticator to handle user authentication. It displays a welcome message with the user's username if they are logged in, and provides a button to sign out.
+function App() { 
   return (
     <Authenticator>
       {({ signOut, user }) => (
